@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">compose-sunflower</string>
+
+    <string name="my_garden_title">My garden</string>
+    <string name="plant_list_title">Plant list</string>
+    <string name="menu_filter_by_grow_zone" translation_description="The label for the menu item to filter the displayed plants by grow zone.">Filter by grow zone</string>
+
 </resources>
