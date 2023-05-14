@@ -97,6 +97,7 @@ fun HomePagerScreen(
         ) { index ->
             when (pages[index]) {
                 SunflowerPage.MY_GARDEN -> {
+                    GardenS
 
                 }
                 SunflowerPage.PLANT_LIST -> {

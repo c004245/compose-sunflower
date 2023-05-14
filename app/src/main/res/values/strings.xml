@@ -5,4 +5,7 @@
     <string name="plant_list_title">Plant list</string>
     <string name="menu_filter_by_grow_zone" translation_description="The label for the menu item to filter the displayed plants by grow zone.">Filter by grow zone</string>
 
+    <string name="garden_empty">Your garden is empty</string>
+    <string name="add_plant" translation_description="Button text that prompts user to navigate to the Plant List to add plants to their empty garden.">Add plant</string>
+
 </resources>
