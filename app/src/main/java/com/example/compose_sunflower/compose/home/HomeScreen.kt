@@ -6,6 +6,7 @@ import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.Icon
@@ -13,9 +14,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
@@ -24,10 +24,14 @@ import androidx.compose.ui.platform.rememberNestedScrollInteropConnection
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.viewinterop.AndroidViewBinding
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.compose_sunflower.R
 import com.example.compose_sunflower.compose.garden.GardenScreen
 import com.example.compose_sunflower.data.Plant
+import com.example.compose_sunflower.data.PlantAndGardenPlantings
 import com.example.compose_sunflower.databinding.HomeScreenBinding
+import com.example.compose_sunflower.viewmodels.GardenPlantingListViewModel
+import com.example.compose_sunflower.viewmodels.PlantListViewModel
 import kotlinx.coroutines.launch
 
 enum class SunflowerPage(
@@ -62,7 +66,27 @@ fun HomePagerScreen(
     onPlantClick: (Plant) -> Unit,
     onPageChange: (SunflowerPage) -> Unit,
     modifier: Modifier = Modifier,
-    pages: Array<SunflowerPage> = SunflowerPage.values()
+    pages: Array<SunflowerPage> = SunflowerPage.values(),
+    gardenPlantingListViewModel: GardenPlantingListViewModel = hiltViewModel(),
+    plantListViewModel: PlantListViewModel = hiltViewModel()
+) {
+    val gardenPlants by gardenPlantingListViewModel.plantAndGardenPlantings.collectAsState(initial = emptyList())
+    val plants by plantListViewModel.plants.observeAsState(initial = emptyList())
+    HomePagerScreen(
+        onPlantClick = onPlantClick, onPageChange = onPageChange, modifier = modifier,
+        pages = pages, gardenPlants = gardenPlants, plants = plants
+    )
+}
+
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+fun HomePagerScreen(
+    onPlantClick: (Plant) -> Unit,
+    onPageChange: (SunflowerPage) -> Unit,
+    modifier: Modifier = Modifier,
+    pages: Array<SunflowerPage> = SunflowerPage.values(),
+    gardenPlants: List<PlantAndGardenPlantings>,
+    plants: List<Plant>,
 ) {
     val pagerState = rememberPagerState()
 
@@ -98,10 +122,19 @@ fun HomePagerScreen(
         ) { index ->
             when (pages[index]) {
                 SunflowerPage.MY_GARDEN -> {
-                    GardenScreen(gardenPlants = g)
-
+                    GardenScreen(gardenPlants = gardenPlants,
+                    Modifier.fillMaxSize(),
+                    onAddPlantClick = {
+                        coroutineScope.launch {
+                            pagerState.scrollToPage(SunflowerPage.PLANT_LIST.ordinal)
+                        }
+                    },
+                    onPlantClick = {
+                        onPlantClick(it.plant)
+                    })
                 }
                 SunflowerPage.PLANT_LIST -> {
+
 
                 }
             }
