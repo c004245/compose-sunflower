@@ -25,6 +25,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.viewinterop.AndroidViewBinding
 import com.example.compose_sunflower.R
+import com.example.compose_sunflower.compose.garden.GardenScreen
 import com.example.compose_sunflower.data.Plant
 import com.example.compose_sunflower.databinding.HomeScreenBinding
 import kotlinx.coroutines.launch
@@ -97,7 +98,7 @@ fun HomePagerScreen(
         ) { index ->
             when (pages[index]) {
                 SunflowerPage.MY_GARDEN -> {
-                    GardenS
+                    GardenScreen(gardenPlants = g)
 
                 }
                 SunflowerPage.PLANT_LIST -> {
