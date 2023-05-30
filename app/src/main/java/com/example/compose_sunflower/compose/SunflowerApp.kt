@@ -6,9 +6,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHost
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.compose_sunflower.compose.home.HomeScreen
 import com.example.compose_sunflower.compose.home.SunflowerPage
 
@@ -41,6 +43,17 @@ fun SunFlowerNavHost(
                 },
                 onPageChange = onPageChange,
                 onAttached = onAttached
+            )
+        }
+        composable(
+            "plantDetail/{plantId}",
+            arguments = listOf(
+                navArgument("plantId") {
+                    type = NavType.StringType
+                })
+        ) {
+            PlantDetailsScreen(
+
             )
         }
 
