@@ -27,6 +27,7 @@ import androidx.compose.ui.viewinterop.AndroidViewBinding
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.compose_sunflower.R
 import com.example.compose_sunflower.compose.garden.GardenScreen
+import com.example.compose_sunflower.compose.plantlist.PlantListScreen
 import com.example.compose_sunflower.data.Plant
 import com.example.compose_sunflower.data.PlantAndGardenPlantings
 import com.example.compose_sunflower.databinding.HomeScreenBinding
@@ -98,7 +99,7 @@ fun HomePagerScreen(
         val coroutineScope = rememberCoroutineScope()
 
         TabRow(selectedTabIndex = pagerState.currentPage) {
-            pages.forEachIndexed { index, page -> 
+            pages.forEachIndexed { index, page ->
                 val title = stringResource(id = page.titleResId)
                 Tab(
                     selected = pagerState.currentPage == index,
@@ -116,24 +117,30 @@ fun HomePagerScreen(
             }
         }
 
-        HorizontalPager(pageCount = pages.size,
+        HorizontalPager(
+            pageCount = pages.size,
             state = pagerState,
             verticalAlignment = Alignment.Top
         ) { index ->
             when (pages[index]) {
                 SunflowerPage.MY_GARDEN -> {
                     GardenScreen(gardenPlants = gardenPlants,
-                    Modifier.fillMaxSize(),
-                    onAddPlantClick = {
-                        coroutineScope.launch {
-                            pagerState.scrollToPage(SunflowerPage.PLANT_LIST.ordinal)
-                        }
-                    },
-                    onPlantClick = {
-                        onPlantClick(it.plant)
-                    })
+                        Modifier.fillMaxSize(),
+                        onAddPlantClick = {
+                            coroutineScope.launch {
+                                pagerState.scrollToPage(SunflowerPage.PLANT_LIST.ordinal)
+                            }
+                        },
+                        onPlantClick = {
+                            onPlantClick(it.plant)
+                        })
                 }
+
                 SunflowerPage.PLANT_LIST -> {
+                    PlantListScreen(
+                        onPlantClick = onPlantClick,
+                        modifier = Modifier.fillMaxSize(),
+                    )
 
 
                 }
