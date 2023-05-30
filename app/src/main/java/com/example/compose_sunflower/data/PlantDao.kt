@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface PlantDao {
-    @Query("SELECT * FROM plants ORDER BYZ name")
+    @Query("SELECT * FROM plants ORDER BY name")
     fun getPlants(): Flow<List<Plant>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

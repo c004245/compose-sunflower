@@ -92,7 +92,7 @@ dependencies {
     implementation 'androidx.hilt:hilt-navigation:1.1.0-alpha02'
     //room
     implementation 'androidx.room:room-ktx:2.5.1'
-    annotationProcessor 'androidx.room:room-compiler:2.5.1'
+    kapt "androidx.room:room-compiler:2.5.1"
 
     implementation "androidx.work:work-runtime:2.8.1"
 
@@ -101,5 +101,13 @@ dependencies {
 
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.6.1"
     implementation("androidx.compose.runtime:runtime-livedata:1.4.3")
+
+    //worker
+    implementation "androidx.work:work-runtime-ktx:2.8.1"
+
+    //gson
+    implementation 'com.google.code.gson:gson:2.10.1'
+
+
 
 }
