@@ -15,4 +15,8 @@ class GardenPlantingRepository @Inject constructor(
 
     fun isPlanted(plantId: String) =
         gardenPlantingDao.isPlanted(plantId = plantId)
+
+    suspend fun createGardenPlanting(plantId: String) {
+        
+    }
 }

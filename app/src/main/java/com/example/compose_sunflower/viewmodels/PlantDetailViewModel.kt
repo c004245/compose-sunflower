@@ -5,9 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
 import com.example.compose_sunflower.data.GardenPlantingRepository
 import com.example.compose_sunflower.data.PlantRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -29,6 +31,14 @@ class PlantDetailViewModel @Inject constructor(
     fun dismissSnackbar() {
         _showSnackbar.value = false
     }
+
+    fun addPlantToGarden() {
+        viewModelScope.launch {
+            gardenPlantingRepository.create
+        }
+    }
+
+    fun hasValidUnsplashKey() = (BuildConfig.UNSPLASH_ACCESS_KEY != "null")
 
     companion object {
         private const val PLANT_ID_SAVED_STATE_KEY = "plantId"
