@@ -120,11 +120,11 @@ fun PlantDetailsScreen(
                     PlantDetailsCallbacks(
                         onBackClick = onBackClick,
                         onFabClick = {
-                            plantDetailsViewModel.addpla
-                        }
+                            plantDetailsViewModel.addPlantToGarden()
+                        },
+                        onShareClick = onShareClick,
+                        onGalleryClick = onGalleryClick
                     )
-
-
                 )
             }
         }
@@ -260,6 +260,17 @@ private fun PlantDetailsContent(
                         .alpha(contentAlpha())
                 )
             }
+            PlantInformation(
+                name = plant.name,
+                wateringInterval = plant.wateringInterval,
+                description = plant.description,
+                hasValidUnsplashKey = hasValidUnsplashKey,
+                onNamePosition = { onNamePosition(it) },
+                toolbarState = toolbarState,
+                onGalleryClick = onGalleryClick,
+                modifier = Modifier.constrainAs(info) {
+                    top.linkTo(image.bottom)
+                })
         }
     }
 }
@@ -531,7 +542,8 @@ private fun PlantHeaderActions(
             modifier = Modifier
                 .padding(end = Dimens.ToolbarIconPadding)
                 .then(iconModifier)
-                .semantics { contentDescription = shareContentDescription
+                .semantics {
+                    contentDescription = shareContentDescription
                 }) {
             Icon(
                 Icons.Filled.Share,

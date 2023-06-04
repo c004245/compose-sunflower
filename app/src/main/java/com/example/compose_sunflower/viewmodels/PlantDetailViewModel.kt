@@ -34,7 +34,8 @@ class PlantDetailViewModel @Inject constructor(
 
     fun addPlantToGarden() {
         viewModelScope.launch {
-            gardenPlantingRepository.create
+            gardenPlantingRepository.createGardenPlanting(plantId = plantId)
+            _showSnackbar.value = true
         }
     }
 

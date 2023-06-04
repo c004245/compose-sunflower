@@ -17,6 +17,7 @@ class GardenPlantingRepository @Inject constructor(
         gardenPlantingDao.isPlanted(plantId = plantId)
 
     suspend fun createGardenPlanting(plantId: String) {
-        
+        val gardenPlanting = GardenPlanting(plantId = plantId)
+        gardenPlantingDao.insertGardenPlanting(gardenPlanting)
     }
 }
