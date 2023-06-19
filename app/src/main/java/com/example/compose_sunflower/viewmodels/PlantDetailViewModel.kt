@@ -6,6 +6,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.compose_sunflower.BuildConfig
 import com.example.compose_sunflower.data.GardenPlantingRepository
 import com.example.compose_sunflower.data.PlantRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -39,7 +40,7 @@ class PlantDetailViewModel @Inject constructor(
         }
     }
 
-    fun hasValidUnsplashKey() = (BuildConfig.UNSPLASH_ACCESS_KEY != "null")
+    fun hasValidUnsplashKey() = ("ytLRqRuNoM5-xmtEs2WqZqI2p9NGiv9z2bIkf_1v7A4" != "null")
 
     companion object {
         private const val PLANT_ID_SAVED_STATE_KEY = "plantId"

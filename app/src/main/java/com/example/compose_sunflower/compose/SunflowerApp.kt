@@ -62,9 +62,17 @@ fun SunFlowerNavHost(
                     createShareIntent(activity, it)
                 },
                 onGalleryClick = {
-//                    navController.navigateUp()
+                    navController.navigate("gallery/${it.name}")
                 }
-
+            )
+        }
+        composable(
+            "gallery/{plantName}",
+            arguments = listOf(navArgument("plantName") {
+                type = NavType.StringType
+            })
+        ) {
+            GalleryScreen(
 
             )
         }

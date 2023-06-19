@@ -48,7 +48,13 @@ android {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
     }
+//    productFlavors {
+//        buildConfigField("String", "UNSPLASH_ACCESS_KEY", "\"" + project.findProperty("unsplash_access_key") + "\"")
+//
+//    }
+
 }
+
 
 dependencies {
 
@@ -109,6 +115,23 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.10.1'
 
     implementation "androidx.constraintlayout:constraintlayout-compose:1.0.1"
+
+
+    //Retrofit2
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava3:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+
+    //OKHttp
+    // OKHTTP
+    implementation 'com.squareup.okhttp3:okhttp:4.10.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.10.0'
+
+    //Paging
+    def paging_version = "3.1.1"
+
+    implementation "androidx.paging:paging-runtime:$paging_version"
+    implementation "androidx.paging:paging-compose:3.2.0-beta01"
 
 
 
