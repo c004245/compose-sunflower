@@ -2,6 +2,7 @@ package com.example.compose_sunflower.compose
 
 import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.widget.Toolbar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
@@ -73,7 +74,14 @@ fun SunFlowerNavHost(
             })
         ) {
             GalleryScreen(
-
+                onPhotoClick = {
+                    val uri = Uri.parse(it.user.attributionUrl)
+                    val intent = Intent(Intent.ACTION_VIEW, uri)
+                    activity.startActivity(intent)
+                },
+                onUpClick = {
+                    navController.navigateUp()
+                }
             )
         }
 

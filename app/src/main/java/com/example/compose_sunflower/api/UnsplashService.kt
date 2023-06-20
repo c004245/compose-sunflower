@@ -22,7 +22,7 @@ interface UnsplashService {
         private const val BASE_URL = "https://api.unsplash.com/"
 
         fun create(): UnsplashService {
-            val logger = HttpLoggingInterceptor().apply { level = Level.BASIC }
+            val logger = HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BASIC }
 
             val client = OkHttpClient.Builder()
                 .addInterceptor(logger)

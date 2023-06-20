@@ -20,10 +20,16 @@ import com.example.compose_sunflower.R
 import com.example.compose_sunflower.compose.card
 import com.example.compose_sunflower.compose.utils.SunflowerImage
 import com.example.compose_sunflower.data.Plant
+import com.example.compose_sunflower.data.UnsplashPhoto
 
 @Composable
 fun PlantListItem(plant: Plant, onClick: () -> Unit) {
     ImageListItem(name = plant.name, imageUrl = plant.imageUrl, onClick = onClick)
+}
+
+@Composable
+fun PhotoListItem(photo: UnsplashPhoto, onClick: () -> Unit) {
+    ImageListItem(name = photo.user.name, imageUrl = photo.urls.small, onClick = onClick)
 }
 
 @OptIn(ExperimentalMaterialApi::class)
